@@ -42,7 +42,7 @@ void print(Node *head)
     }
 }
 
-Node *reverseDLL(Node *head)
+Node *reverseDLLByStack(Node *head)
 {
     if (head == nullptr || head->next == nullptr)
         return head;
@@ -66,12 +66,29 @@ Node *reverseDLL(Node *head)
     return head;
 }
 
+Node* reverseDLLByPointer(Node* head){
+    if(head==nullptr || head->next==nullptr) return head;
+    Node* prev=nullptr;
+    Node* curr= head;
+    while(curr!=nullptr){
+        Node* next=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=next;
+    }
+    return prev;
+}
+
+
 int main()
 {
     vector<int> arr = {1, 2, 3, 4, 5};
     Node *head = arrayToDLL(arr);
     print(head);
     cout << "\n";
-    head = reverseDLL(head);
+    head = reverseDLLByStack(head);
+    print(head);
+    cout << "\n";
+    head = reverseDLLByPointer(head);
     print(head);
 }
